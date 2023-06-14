@@ -6,7 +6,7 @@ import { IoMenu, IoClose } from 'react-icons/io5'
 
 const Header = () => {
 
-    const headerRef = useRef()
+    const headerRef = useRef(null)
     const isConnected = useSelector((state) => state.auth.isConnected)
 
     // For responsive view
@@ -56,6 +56,12 @@ const Header = () => {
                                     onClick={handleNavOpen}
                                     className='text-3xl text-lightGold' 
                                 />
+
+                                {navOpen ? (
+                                    <></>
+                                ) : (
+                                    <></>
+                                )}
                             </>
                         ) : (
                             <>
@@ -72,7 +78,7 @@ const Header = () => {
             </header>
 
             <div
-                className={`fixed w-full p-6 z-30 transition-all duration-700 ${navOpen ? 'opacity-100' : 'opacity-0'}`}
+                className={`lg:hidden fixed w-full p-6 z-30 transition-all duration-700`}
                 style={{
                     background: 'rgba(58, 52, 52, 0.5)',
                     backdropFilter: 'blur(42px)',
