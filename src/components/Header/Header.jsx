@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { NavConnected, NavLinks, NavLogo, NavSocials } from './components'
 // Hamburger Menu & Close Menu
@@ -6,7 +6,6 @@ import { IoMenu, IoClose } from 'react-icons/io5'
 
 const Header = () => {
 
-    const headerRef = useRef(null)
     const isConnected = useSelector((state) => state.auth.isConnected)
 
     // For responsive view
@@ -29,18 +28,9 @@ const Header = () => {
         setNavOpen(!navOpen)
     }
 
-    const [headerHeight, setHeaderHeight] = useState(0);
-    useEffect(() => {
-        if (headerRef.current) {
-            const height = headerRef.current.offsetHeight;
-            setHeaderHeight(height);
-        }
-    }, []);
-
     return (
         <div>
             <header
-                ref={headerRef}
                 className={`fixed inset-x-0 py-4 z-40`}
                 style={{
                     background: 'rgba(58, 52, 52, 0.5)',
@@ -52,15 +42,16 @@ const Header = () => {
                         <NavLogo />
                         {isSmallScreen ? (
                             <>
-                                <IoMenu 
-                                    onClick={handleNavOpen}
-                                    className='text-3xl text-lightGold' 
-                                />
-
                                 {navOpen ? (
-                                    <></>
+                                    <IoClose
+                                        onClick={handleNavOpen}
+                                        className='text-3xl text-lightGold'
+                                    />
                                 ) : (
-                                    <></>
+                                    <IoMenu
+                                        onClick={handleNavOpen}
+                                        className='text-3xl text-lightGold'
+                                    />
                                 )}
                             </>
                         ) : (
@@ -75,25 +66,18 @@ const Header = () => {
                         )}
                     </div>
                 </nav>
-            </header>
 
-            <div
-                className={`lg:hidden fixed w-full p-6 z-30 transition-all duration-700`}
-                style={{
-                    background: 'rgba(58, 52, 52, 0.5)',
-                    backdropFilter: 'blur(42px)',
-                    top: navOpen ? headerHeight : -1000,
-                }}
-            >
-                <div className='space-y-6'>
-                    <NavLinks />
-                    {!isConnected ? (
-                        <NavSocials />
-                    ) : (
-                        <NavConnected />
-                    )}
-                </div>
-            </div>
+                {navOpen && (
+                    <div className='container py-6 space-y-6'>
+                        <NavLinks />
+                        {!isConnected ? (
+                            <NavSocials />
+                        ) : (
+                            <NavConnected />
+                        )}
+                    </div>
+                )}
+            </header>
         </div>
     )
 }
