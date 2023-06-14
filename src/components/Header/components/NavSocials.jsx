@@ -28,13 +28,13 @@ const NavSocials = () => {
     ]
 
     return (
-        <div className='flex items-center gap-4'>
-            <div className='flex gap-2'>
+        <div className='flex max-lg:flex-col max-lg:items-end lg:items-center gap-8 lg:gap-4'>
+            <div className='flex gap-4 lg:gap-2'>
                 {socials.map((item,index) => (
                     <a
                         key={index}
                         href={`/`}
-                        className={`text-lg text-lightGold`}
+                        className={`text-2xl lg:text-lg text-lightGold`}
                     >
                         {item.icon}
                     </a>

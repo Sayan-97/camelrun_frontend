@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 // Camel NFTS
 import { CamelNftCards } from '../../constants/constants'
+import { NFTModal } from '../../modals'
 import { CamelNFTS, FilterNFTS } from './components'
 
 const NFTS = () => {
@@ -19,6 +20,11 @@ const NFTS = () => {
         setSelectedCategory(category);
     };
 
+    const [selectedCard, setSelectedCard] = useState('')
+    const handleClick = (nft) => {
+        setSelectedCard(nft)
+    }
+
     // Modal Function
     let [isOpen, setIsOpen] = useState(false)
 
@@ -34,7 +40,7 @@ const NFTS = () => {
         <div className='mt-28 container'>
             <div className='flex items-center justify-between'>
                 <p className='text-lg font-medium'>{selectedCategory} ({totalNfts})</p>
-                <FilterNFTS 
+                <FilterNFTS
                     category={category}
                     handleCategoryChange={handleCategoryChange}
                 />
@@ -46,10 +52,15 @@ const NFTS = () => {
                         img={item.imgSrc}
                         title={item.title}
                         cost={item.cost}
-                        onClick={openModal}
+                        onClick={() => {handleClick(item); openModal()}}
                     />
                 ))}
             </div>
+            <NFTModal
+                isOpen={isOpen}
+                closeModal={closeModal}
+                selectedNft={selectedCard}
+            />
         </div>
     )
 }

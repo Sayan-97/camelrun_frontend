@@ -23,13 +23,13 @@ const NavLinks = () => {
     const [activeLink, setActiveLink] = useState(getActiveLink(location.pathname));
 
     return (
-        <ul className='max-lg:grid lg:space-x-6 lg:ml-12'>
+        <ul className='max-lg:grid max-lg:justify-items-end max-lg:space-y-2 lg:space-x-6 lg:ml-12'>
             {links.map((item,index) => (
                 <Link 
                     key={index} 
                     to={item.link}
                     onClick={() => setActiveLink(item.title)}
-                    className={`text-lg font-medium ${item.title === activeLink ? 'text-mediumGold' : 'text-lightGold' } hover:text-mediumGold uppercase transition-all ease-in-out`}
+                    className={`text-2xl lg:text-lg font-medium ${item.title === activeLink ? 'text-mediumGold' : 'text-lightGold' } hover:text-mediumGold uppercase transition-all ease-in-out`}
                 >
                     {item.title}
                 </Link>
